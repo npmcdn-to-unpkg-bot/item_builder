@@ -1,0 +1,2 @@
+class RunesController < ApplicationController
+end
