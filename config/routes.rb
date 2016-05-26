@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'main/index'
 
+  get 'champions/populate' => 'champions#populate'
   resources :champions, :items, :runes, :masteries, :spells, :summoners
 
   # The priority is based upon order of creation: first created -> highest priority.

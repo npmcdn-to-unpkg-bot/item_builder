@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526151712) do
+ActiveRecord::Schema.define(version: 20160526195550) do
 
   create_table "champions", force: :cascade do |t|
     t.float    "base_hp"
@@ -45,6 +45,11 @@ ActiveRecord::Schema.define(version: 20160526151712) do
     t.integer  "image_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.text     "spell_1"
+    t.text     "spell_2"
+    t.text     "spell_3"
+    t.text     "spell_4"
+    t.text     "image"
   end
 
   add_index "champions", ["image_id"], name: "index_champions_on_image_id"
