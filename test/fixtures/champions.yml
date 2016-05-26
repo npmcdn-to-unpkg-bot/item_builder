@@ -1,0 +1,63 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  base_hp: 1.5
+  base_hp5: 1.5
+  base_mana: 1.5
+  base_mp5: 1.5
+  base_range: 1.5
+  base_ad: 1.5
+  base_as: 1.5
+  base_armor: 1.5
+  base_mr: 1.5
+  base_ms: 1.5
+  hp_per_lvl: 1.5
+  hp5_per_lvl: 1.5
+  mana_per_lvl: 1.5
+  mp5_per_lvl: 1.5
+  range_per_lvl: 1.5
+  ad_per_lvl: 1.5
+  as_per_lvl: 1.5
+  armor_per_lvl: 1.5
+  mr_per_lvl: 1.5
+  ms_per_lvl: 1.5
+  description: MyText
+  passive: MyText
+  spell_1_id: 
+  spell_2_id: 
+  spell_3_id: 
+  spell_4_id: 
+  base_crit: 1.5
+  crit_per_lvl: 1.5
+  image_id: 
+
+two:
+  base_hp: 1.5
+  base_hp5: 1.5
+  base_mana: 1.5
+  base_mp5: 1.5
+  base_range: 1.5
+  base_ad: 1.5
+  base_as: 1.5
+  base_armor: 1.5
+  base_mr: 1.5
+  base_ms: 1.5
+  hp_per_lvl: 1.5
+  hp5_per_lvl: 1.5
+  mana_per_lvl: 1.5
+  mp5_per_lvl: 1.5
+  range_per_lvl: 1.5
+  ad_per_lvl: 1.5
+  as_per_lvl: 1.5
+  armor_per_lvl: 1.5
+  mr_per_lvl: 1.5
+  ms_per_lvl: 1.5
+  description: MyText
+  passive: MyText
+  spell_1_id: 
+  spell_2_id: 
+  spell_3_id: 
+  spell_4_id: 
+  base_crit: 1.5
+  crit_per_lvl: 1.5
+  image_id: 

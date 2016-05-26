@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cooldown: MyText
+  cooldown_burn: 1.5
+  cost: MyText
+  cost_burn: MyString
+  cost_type: MyString
+  description: MyText
+  effect: MyText
+  effect_burn: MyText
+  image_id: 
+  key: MyString
+  max_rank: 1
+  name: MyString
+  range: MyText
+  range_burn: MyText
+  resource: MyString
+  sanitized_description: MyText
+  sanitized_tooltip: MyText
+  var: MyText
+
+two:
+  cooldown: MyText
+  cooldown_burn: 1.5
+  cost: MyText
+  cost_burn: MyString
+  cost_type: MyString
+  description: MyText
+  effect: MyText
+  effect_burn: MyText
+  image_id: 
+  key: MyString
+  max_rank: 1
+  name: MyString
+  range: MyText
+  range_burn: MyText
+  resource: MyString
+  sanitized_description: MyText
+  sanitized_tooltip: MyText
+  var: MyText

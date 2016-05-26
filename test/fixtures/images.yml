@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  full: MyString
+  group: MyString
+  h: 1
+  sprite: MyString
+  w: 1
+  x: 1
+  'y': 1
+  z: 1
+
+two:
+  full: MyString
+  group: MyString
+  h: 1
+  sprite: MyString
+  w: 1
+  x: 1
+  'y': 1
+  z: 1
