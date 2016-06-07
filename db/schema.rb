@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526195550) do
+ActiveRecord::Schema.define(version: 20160607003256) do
 
   create_table "champions", force: :cascade do |t|
     t.float    "base_hp"
@@ -50,9 +50,12 @@ ActiveRecord::Schema.define(version: 20160526195550) do
     t.text     "spell_3"
     t.text     "spell_4"
     t.text     "image"
+    t.integer  "riot_id"
+    t.string   "name"
   end
 
   add_index "champions", ["image_id"], name: "index_champions_on_image_id"
+  add_index "champions", ["riot_id"], name: "index_champions_on_riot_id", unique: true
   add_index "champions", ["spell_1_id"], name: "index_champions_on_spell_1_id"
   add_index "champions", ["spell_2_id"], name: "index_champions_on_spell_2_id"
   add_index "champions", ["spell_3_id"], name: "index_champions_on_spell_3_id"
@@ -69,6 +72,44 @@ ActiveRecord::Schema.define(version: 20160526195550) do
     t.integer  "z"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "riot_id"
+    t.string  "name"
+    t.string  "group"
+    t.text    "description"
+    t.text    "sanitized_description"
+    t.string  "plain_text"
+    t.integer "depth"
+    t.text    "from"
+    t.boolean "hide_from_all"
+    t.text    "maps"
+    t.text    "image"
+    t.text    "stats"
+    t.text    "gold"
+    t.text    "effect"
+    t.boolean "consumed"
+    t.string  "colloq"
+    t.text    "tags"
+    t.text    "into"
+    t.integer "stacks"
+    t.boolean "in_store"
+    t.string  "required_champion"
+    t.integer "special_recipe"
+  end
+
+  add_index "items", ["riot_id"], name: "index_items_on_riot_id"
+
+  create_table "masteries", force: :cascade do |t|
+    t.integer "riot_id"
+    t.string  "name"
+    t.text    "description"
+    t.text    "sanitized_description"
+    t.integer "ranks"
+    t.string  "prereq"
+    t.text    "image"
+    t.string  "mastery_tree"
   end
 
   create_table "spells", force: :cascade do |t|

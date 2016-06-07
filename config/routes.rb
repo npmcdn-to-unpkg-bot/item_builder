@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   get 'main/index'
 
   get 'champions/populate' => 'champions#populate'
+  get 'champions/index' => 'champions#json_index'
+  get 'items/populate' => 'items#populate'
+  get 'masteries/populate' => 'masteries#populate'
   resources :champions, :items, :runes, :masteries, :spells, :summoners
 
   # The priority is based upon order of creation: first created -> highest priority.

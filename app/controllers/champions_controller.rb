@@ -7,10 +7,18 @@ class ChampionsController < ApplicationController
 	end
 
 	def index
+		# currentl does nothing.  the index action redirects to json_index
 		@champions = Champion.all
 	end
 
+	def json_index
+		@champions = Champion.select("riot_id, name, description, image").all
+		render json: @champions
+	end
+
 	def show
+		@champion = Champion.where("riot_id = ?", params[:riot_id])
+		render json: @champion
 	end
 
 	def edit
@@ -28,13 +36,15 @@ class ChampionsController < ApplicationController
         apiKey = '0457fb60-d595-4a50-b8ba-4c3af101fb20'
         response = RestClient.get riotApiBaseUrl + championPath, {:params => {:api_key => apiKey, :champData => 'all'}}
 		all_champions = JSON.parse(response)['data']
-		@champ_yaml = all_champions.to_yaml
 		#Iterate through each champion and save to the database using the
 		# Champion model
 		@champions = []
 		all_champions.each do |key, champion|
 			new_champion = Hash.new
-			new_champion[:image] = champion['image'].to_json
+			new_champion[:riot_id] = champion['id']
+			new_champion[:name] = champion['name']
+			new_champion[:description] = champion['title']
+			new_champion[:image] = champion['image'].to_h
 			new_champion[:base_armor] = champion['stats']['armor']
 			new_champion[:armor_per_lvl] = champion['stats']['armorperlevel']
 			new_champion[:base_ad] = champion['stats']['attackdamage']
@@ -54,8 +64,14 @@ class ChampionsController < ApplicationController
 			new_champion[:mp5_per_lvl] = champion['stats']['mpregenperlevel']
 			new_champion[:base_mr] = champion['stats']['spellblock']
 			new_champion[:mr_per_lvl] = champion['stats']['spellblockperlevel']
-			
+			new_champion[:spell_1] = champion['spells'][0].to_h
+			new_champion[:spell_2] = champion['spells'][1].to_h
+			new_champion[:spell_3] = champion['spells'][2].to_h
+			new_champion[:spell_4] = champion['spells'][3].to_h
+			new_champion[:passive] = champion['passive'].to_h
 			@champions.push(new_champion)
+			champ = Champion.create(new_champion)
+			champ.save
 		end
 	end
 

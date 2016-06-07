@@ -1,0 +1,20 @@
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>IMG JSON</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @champions.each do |champ| %>
+		<tr>
+			<td><%= champ.riot_id %></td>
+			<td><%= champ.name %></td>
+			<td><%= champ.description %></td>
+			<td><%= champ.image[:full] %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
