@@ -6,6 +6,8 @@ class MasteriesController < ApplicationController
 	end
 
 	def index
+		@masteries = Mastery.all
+		render json: @masteries
 	end
 
 	def show

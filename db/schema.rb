@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607003256) do
+ActiveRecord::Schema.define(version: 20160607052438) do
 
   create_table "champions", force: :cascade do |t|
     t.float    "base_hp"
@@ -110,6 +110,17 @@ ActiveRecord::Schema.define(version: 20160607003256) do
     t.string  "prereq"
     t.text    "image"
     t.string  "mastery_tree"
+  end
+
+  create_table "runes", force: :cascade do |t|
+    t.integer "riot_id"
+    t.string  "name"
+    t.text    "description"
+    t.text    "sanitized_description"
+    t.text    "image"
+    t.text    "stats"
+    t.string  "type"
+    t.string  "rune_type"
   end
 
   create_table "spells", force: :cascade do |t|

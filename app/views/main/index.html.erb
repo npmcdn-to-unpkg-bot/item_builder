@@ -4,14 +4,77 @@ Code Conventions - Because you'll forget.  You know you will!
 
 - All html id/class names should be formatted_like_so
 - All javascript object/variable names should be formattedLikeSo
-- Single quotes for all html attributes
+- Single quotes for all html attributes when possible
 -->
-
+<%
+    img_base = 'http://ddragon.leagueoflegends.com/'
+    current_version = '6.11.1'
+    defensive_stats = {
+        :armor => 'Armor',
+        :magic_resist => 'Magic Resist',
+        :health => 'Health',
+        :health_regen => 'Health Regen',
+        :movement_speed => 'Movement Speed',
+        :life_steal => 'Life Steal'
+    }
+    offensive_stats = {
+        :attack_damage => 'Attack Damage',
+        :attack_speed => 'Attack Speed',
+        :crit_chance => 'Crit Chance',
+        :crit_damage => 'Crit Damage',
+        :armor_pen => 'Armor Penetration',
+        :ability_power => 'Ability Power',
+        :spell_pen => 'Spell Penetration',
+        :cooldown_reduction => 'Cooldown Reduction'
+    }
+    other_stats = {
+        :mana => 'Mana',
+        :mana_regen => 'Mana Regen',
+        :gold_generation => 'Gold Generation',
+        :jungle_item => 'Jungle Item',
+        :active => 'Active'
+    }
+    stat_map = {
+        'FlatArmorMod' => :armor,
+        'FlatAttackSpeedMod' => :attack_speed,
+        'FlatCritChanceMod' => :crit_chance,
+        'FlatCritDamageMod' => :crit_damage,
+        'FlatHPPoolMod' => :health,
+        'FlatHPRegenMod' => :health_regen,
+        'FlatMPPoolMod' => :mana,
+        'FlatMPRegenMod' => :mana_regen,
+        'FlatMagicDamageMod' => :ability_power,
+        'FlatMovementSpeedMod' => :movement_speed,
+        'FlatPhysicalDamageMod' => :attack_damage,
+        'FlatSpellBlockMod' => :magic_resist,
+        'PercentArmorMod' => :armor,
+        'PercentAttackSpeedMod' => :attack_speed,
+        'PercentCritChanceMod' => :crit_chance,
+        'PercentCritDamageMod' => :crit_damage,
+        'PercentHPPoolMod' => :health,
+        'PercentHPRegenMod' => :health_regen,
+        'PercentMPPoolMod' => :mana,
+        'PercentMPRegenMod' => :mana_regen,
+        'PercentMagicDamageMod' => :ability_power,
+        'PercentMovementSpeedMod' => :movement_speed,
+        'PercentPhysicalDamageMod' => :attack_damage,
+        'PercentSpellBlockMod' => :magic_resist,
+        'PercentLifeStealMod' => :life_steal
+    }
+%>
 <html>
 	<head>
+        <style>
+            .attr {
+                display: none;
+            }
+            .item_element {
+                padding: 2px;
+            }
+        </style>
 		<script src='https://code.jquery.com/jquery-1.12.0.min.js'></script>
         <script src='https://code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js'></script>
+        <script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
         <link rel='stylesheet' href='//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css'>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
@@ -26,72 +89,41 @@ Code Conventions - Because you'll forget.  You know you will!
         		var selectedItems = [];
         		var selectedMasteries = {};
         		var selectedRunes = {};
-        		var staticLink;
-        		var riotApiBaseUrl = 'https://na.api.pvp.net/api/lol/';
-                var championPath = 'static-data/na/v1.2/champion';
-                var itemPath = 'static-data/na/v1.2/item';
-                var mapPath = 'static-data/na/v1.2/map';
-                var apiKey = '0457fb60-d595-4a50-b8ba-4c3af101fb20'; // This should probably be stored in the backend
-                var imgBase = 'http://ddragon.leagueoflegends.com/';
-                var ddragonVersion = '6.9.1';
 
-                // 1. Populate all the list objects
-                
+                $itemGrid = $('#item_select_grid').isotope({
+                    itemSelector: '.item_element',
+                    layoutMode: 'fitRows',
+                    getSortData: {
+                        name: '.name'
+                    },
+                    sortBy: 'name'
+                })
+                $('.item_attr_filter_box').change(function() {
+                    var filterValue = '';
+                    $('.item_attr_filter_box').each(function(){
+                        if($(this).is(':checked')){
+                            filterValue = filterValue + '.' + $(this).attr('name')
+                        }
+                    })
+                    filterValue = $.trim(filterValue)
+                    console.log(filterValue)
+                    $itemGrid.isotope({ filter: filterValue });
+                });
 
-                // 1a. Retrieve all Champions
-
-                // 1b. Retrieve all Items
-
-                // 1c. Retrieve all Masteries
-
-                // 1d. Retrieve all Runes
-
-                // 2. Populate page elements
-
-                // 2a. Populate champ select dropdown
-
-                // 2b. Populate items
-
-                // 2c. Populate masteries
-
-                // 2d. Populate runes
-
-                // 3. Bind event handlers
-
-                // 3a. Bind champ select dropdown event
-                // 		- Populate base stats in selectedChampion and fill in page values accordingly
-                //		- Set champion portrait image
-                // 		- Filter item list (champ specific items, i.e. Viktor)
-
-                // 3b. Bind item build events
-                //		- OnClick: toggle selected
-                //		- bind 'clear' button
-                //		- bind 'remove' button
-
-                // 3c. Bind item selector events
-                //		- Bind wilcard search event
-                //		- Bind radio button click events
-                //		- Bind 'clear' button event
-
-                // 3d. Bind item select events
-                //		- Bind 'selected' toggle events
-                // 		- Bind 'Add button event'
-
-                // 4. Bind mastery page events
-                //		- Bind onclick logic to enforce point max at each level
-                // 		- Bind 'clear' button event
-
-                // 5. Bind Rune page events
-                //		- Toggle selected for rune list
-                //		- bind expand/contract for rune types
-                //		- bind 'add' and double click to add rune to page
         	})
         </script>
     </head>
     <body>
     	<h1>League of Legends Build Planner</h1>
     	<br/><br/>
-    	<div id='champion_select'></div>
+    	<div id='champion_select'>
+            <select name='selected_champ' id='champ_id'>
+            <!-- Roadmap: Add in champ portraits using jQuery select widgets -->
+                <% @champions.each do |champ| %>
+                    <option value='<%= champ['riot_id'] %>'><%= champ['name'] %></option>
+                <% end %>
+            </select>       
+        </div>
     	<div id='champion_summary'>
     		<div id='champion_portrait'></div>
     		<div id='champion_stats'></div>
@@ -101,13 +133,45 @@ Code Conventions - Because you'll forget.  You know you will!
     	<div id='item_selection'>
     		<div id='wildcard_filter'></div>
     		<div id='item_attribute_filters'>
+                <div id='item_defensive_attributes'>
+                    <% defensive_stats.each do |key, val| %>
+                        <label><input class='item_attr_filter_box' type='checkbox' name='<%= key %>'><%= val %></label>
+                    <% end %>
+                </div>
+                <div id='item_offensive_attributes'>
+                    <% offensive_stats.each do |key, val| %>
+                        <label><input class='item_attr_filter_box' type='checkbox' name='<%= key %>'><%= val %></label>
+                    <% end %>
+                </div>
+                <div id='item_other_attributes'>
+                    <% other_stats.each do |key, val| %>
+                        <label><input class='item_attr_filter_box' type='checkbox' name='<%= key %>'><%= val %></label>
+                    <% end %>
+                </div>
     			<button id='clear_item_filters'>Clear Filters</button>
     		</div>
-    		<div id='filtered_items'></div>
+    		<div id='item_select_grid'>
+                <% @items.each do |item| %>
+                <% 
+                    filter_tags = ""
+                    unless item['stats'].nil?
+                        item['stats'].each do |key, stat|
+                            filter_tags += ' ' + stat_map[key].to_s
+                        end 
+                    end 
+                %>
+                <div class='item_element<%= filter_tags %>'>
+                    <img src='<%= "#{img_base}/cdn/#{current_version}/img/item/#{item['image']['full']}" %>'>
+                    <!--<p><%= item['riot_id'] %></p>-->
+                    <div class='name attr'><%= item['name'] %></div>
+                    <div class='id attr'><%= item['riot_id'] %></div>
+                </div>
+                <% end %>
+            </div>
     		<button id='add_selected_item'>Add Item</button>
     	</div>
     	<h2>Set Masteries</h2>
-    	<div id='mastery_builder'>
+    	<div id='mastery_builder' style="background: transparent url('http://ddragon.leagueoflegends.com/cdn/img/mastery/masteryback.jpg') repeat scroll 0% 0%; width: 827px; height: 479px;">
     		<div id='mastery_tree_one'></div>
     		<div id='mastery_tree_two'></div>
     		<div id='mastery_tree_three'></div>
@@ -115,8 +179,23 @@ Code Conventions - Because you'll forget.  You know you will!
     	</div>
     	<h2>Set Runes</h2>
     	<div id='rune_builder'>
-    		<div id='rune_lists'></div>
-    		<div id='selected_runes'>
+    		<div id='rune_lists'>
+                <!-- This should be expandable sections just like in the LoL client -->
+                <div id='rune_marks' class='rune_select_wrapper'>
+                    
+                </div>
+                <div id='rune_seals' class='rune_select_wrapper'>
+                    
+                </div>
+                <div id='rune_glyphs' class='rune_select_wrapper'>
+                    
+                </div>
+                <div id='rune_quints' class='rune_select_wrapper'>
+                    
+                </div>
+
+            </div>
+    		<div id='selected_runes' style="background: transparent url('https://s3-us-west-1.amazonaws.com/riot-api/img/rune-bg.png') repeat scroll 0% 0%; width:656px; height: 436px;">
     			<button id='clear_runes'>Clear Runes</button>
     		</div>
     	</div>
