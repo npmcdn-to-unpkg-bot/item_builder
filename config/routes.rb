@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'items/populate' => 'items#populate'
   get 'masteries/populate' => 'masteries#populate'
   get 'runes/populate' => 'runes#populate'
+  get 'champions/getStatsWithItems' => 'champions#get_stats_with_items'
   resources :champions, :items, :runes, :masteries, :spells, :summoners
 
   # The priority is based upon order of creation: first created -> highest priority.

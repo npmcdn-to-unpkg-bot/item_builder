@@ -1,22 +1,61 @@
 class ItemsController < ApplicationController
-	def new
-	end
-
-	def create
-	end
 
 	def index
 		@items = Item.all
 		render json: @items
 	end
 
-	def show
-	end
-
-	def edit
-	end
-
-	def update
+	def get_real_stats
+		raw_items = Item.all
+		real_items = {}
+		raw_items.each do |item|
+			new_item = {}
+			# First, let's gather the stats the are contained in the stats object
+			# (yaknow, like they should be)
+			unless item.stats.empty?
+				item.stats.each do |stat, val|
+					case stat
+						when 'FlatArmorMod'
+							new_item[:base_stats][:armor] = val
+						when 'FlatCritChanceMod'
+							new_item[:base_stats][:crit] = val
+						when 'FlatHPPoolMod'
+							new_item[:base_stats][:health] = val
+						when 'FlatMPPoolMod'
+							new_item[:base_stats][:mana] = val
+						when 'FlatMagicDamageMod'
+							new_item[:base_stats][:ability_power] = val
+						when 'FlatMovementSpeedMod'
+							new_item[:base_stats][:flat_move_speed] = val
+						when 'FlatPhysicalDamageMod'
+							new_item[:base_stats][:attack_damage] = val
+						when 'FlatSpellBlockMod'
+							new_item[:base_stats][:magic_resist] = val
+						when 'PercentAttackSpeedMod'
+							new_item[:base_stats][:attack_speed] = val
+						when 'PercentLifeStealMod'
+							new_item[:base_stats][:life_steal] = val
+						# when 'PercentMovementSpeedMod'
+						# 	new_item[:base_stats][:percent_move_speed] = val
+					end
+				end
+				# Next it's time to grab the myriad stats exceptions
+				# 1. Mana Regen
+				# 2. HP Regen
+				# 3. Magic Penetration
+				# 4. Spell Penetration
+				# 5. Cooldown Reduction
+				# 6. Flat Mana
+				# 	Manamune, Seraph's, Tear, RoA
+				# 7. % HP Pool (Cinderhulk
+				# 8. % AP (Rabadon/wooglet)
+				# 9. % Spell pen / Armor Pen
+				# 10. Aura buffs (MR, MR Reduction, HP Regen, etc)
+				# 11. Unique Passives (Life Steal, Penetration, MoveSpeed(% and flat), GoldPer10)
+				# 12. Special cases (Spirit Visage, Black Cleaver, Sterak's, Warmog's, Hex core, Mobi Boots, Death's Dance, Essence Reaver, Jaurum's Fist, Mejai)
+				# 13: Tenacity
+			end
+		end
 	end
 
 	def populate

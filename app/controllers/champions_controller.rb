@@ -1,11 +1,5 @@
 class ChampionsController < ApplicationController
 
-	def new
-	end
-
-	def create
-	end
-
 	def index
 		# currentl does nothing.  the index action redirects to json_index
 		@champions = Champion.all
@@ -21,10 +15,10 @@ class ChampionsController < ApplicationController
 		render json: @champion
 	end
 
-	def edit
-	end
-
-	def update
+	def get_stats_with_items
+		items = params[:items]
+		champion = Champion.where("riot_id = ?", params[:id])
+		
 	end
 
 	def populate

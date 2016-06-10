@@ -9,66 +9,171 @@ Code Conventions - Because you'll forget.  You know you will!
 <%
     img_base = 'http://ddragon.leagueoflegends.com/'
     current_version = '6.11.1'
+    # defensive_stats = {
+    #     :armor => 'Armor',
+    #     :magic_resist => 'Magic Resist',
+    #     :health => 'Health',
+    #     :health_regen => 'Health Regen',
+    #     :movement_speed => 'Movement Speed',
+    #     :life_steal => 'Life Steal'
+    # }
+    # offensive_stats = {
+    #     :attack_damage => 'Attack Damage',
+    #     :attack_speed => 'Attack Speed',
+    #     :crit_chance => 'Crit Chance',
+    #     :crit_damage => 'Crit Damage',
+    #     :armor_pen => 'Armor Penetration',
+    #     :ability_power => 'Ability Power',
+    #     :spell_pen => 'Spell Penetration',
+    #     :cooldown_reduction => 'Cooldown Reduction'
+    # }
+    # other_stats = {
+    #     :mana => 'Mana',
+    #     :mana_regen => 'Mana Regen',
+    #     :gold_generation => 'Gold Generation',
+    #     :jungle_item => 'Jungle Item',
+    #     :active => 'Active'
+    # }
     defensive_stats = {
-        :armor => 'Armor',
-        :magic_resist => 'Magic Resist',
-        :health => 'Health',
-        :health_regen => 'Health Regen',
-        :movement_speed => 'Movement Speed',
-        :life_steal => 'Life Steal'
+        :Armor => 'Armor',
+        :SpellBlock => 'Magic Resist',
+        :Health => 'Health',
+        :HealthRegen => 'Health Regen',
+        :NonbootsMovement => 'Non-Boot Movement Speed',
+        :Boots => 'Boots',
+        :LifeSteal => 'Life Steal'
     }
     offensive_stats = {
-        :attack_damage => 'Attack Damage',
-        :attack_speed => 'Attack Speed',
-        :crit_chance => 'Crit Chance',
-        :crit_damage => 'Crit Damage',
-        :armor_pen => 'Armor Penetration',
-        :ability_power => 'Ability Power',
-        :spell_pen => 'Spell Penetration',
-        :cooldown_reduction => 'Cooldown Reduction'
+        :Damage => 'Attack Damage',
+        :AttackSpeed => 'Attack Speed',
+        :CriticalStrike => 'Crit Chance',
+        :ArmorPenetration => 'Armor Penetration',
+        :SpellDamage => 'Ability Power',
+        :MagicPenetration => 'Spell Penetration',
+        :CooldownReduction => 'Cooldown Reduction'
     }
     other_stats = {
-        :mana => 'Mana',
-        :mana_regen => 'Mana Regen',
-        :gold_generation => 'Gold Generation',
-        :jungle_item => 'Jungle Item',
-        :active => 'Active'
-    }
-    stat_map = {
-        'FlatArmorMod' => :armor,
-        'FlatAttackSpeedMod' => :attack_speed,
-        'FlatCritChanceMod' => :crit_chance,
-        'FlatCritDamageMod' => :crit_damage,
-        'FlatHPPoolMod' => :health,
-        'FlatHPRegenMod' => :health_regen,
-        'FlatMPPoolMod' => :mana,
-        'FlatMPRegenMod' => :mana_regen,
-        'FlatMagicDamageMod' => :ability_power,
-        'FlatMovementSpeedMod' => :movement_speed,
-        'FlatPhysicalDamageMod' => :attack_damage,
-        'FlatSpellBlockMod' => :magic_resist,
-        'PercentArmorMod' => :armor,
-        'PercentAttackSpeedMod' => :attack_speed,
-        'PercentCritChanceMod' => :crit_chance,
-        'PercentCritDamageMod' => :crit_damage,
-        'PercentHPPoolMod' => :health,
-        'PercentHPRegenMod' => :health_regen,
-        'PercentMPPoolMod' => :mana,
-        'PercentMPRegenMod' => :mana_regen,
-        'PercentMagicDamageMod' => :ability_power,
-        'PercentMovementSpeedMod' => :movement_speed,
-        'PercentPhysicalDamageMod' => :attack_damage,
-        'PercentSpellBlockMod' => :magic_resist,
-        'PercentLifeStealMod' => :life_steal
-    }
+        :Mana => 'Mana',
+        :ManaRegen => 'Mana Regen',
+        :GoldPer => 'Gold Generation',
+        :Jungle => 'Jungle Item',
+        :Aura => 'Aura',
+        :OnHit => 'On Hit',
+        :Tenacity => 'Tenacity',
+        :Active => 'Active',
+        :Vision => 'Vision'
+    } 
+    # stat_map = {
+    #     'FlatArmorMod' => :armor,
+    #     'FlatAttackSpeedMod' => :attack_speed,
+    #     'FlatCritChanceMod' => :crit_chance,
+    #     'FlatCritDamageMod' => :crit_damage,
+    #     'FlatHPPoolMod' => :health,
+    #     'FlatHPRegenMod' => :health_regen,
+    #     'FlatMPPoolMod' => :mana,
+    #     'FlatMPRegenMod' => :mana_regen,
+    #     'FlatMagicDamageMod' => :ability_power,
+    #     'FlatMovementSpeedMod' => :movement_speed,
+    #     'FlatPhysicalDamageMod' => :attack_damage,
+    #     'FlatSpellBlockMod' => :magic_resist,
+    #     'PercentArmorMod' => :armor,
+    #     'PercentAttackSpeedMod' => :attack_speed,
+    #     'PercentCritChanceMod' => :crit_chance,
+    #     'PercentCritDamageMod' => :crit_damage,
+    #     'PercentHPPoolMod' => :health,
+    #     'PercentHPRegenMod' => :health_regen,
+    #     'PercentMPPoolMod' => :mana,
+    #     'PercentMPRegenMod' => :mana_regen,
+    #     'PercentMagicDamageMod' => :ability_power,
+    #     'PercentMovementSpeedMod' => :movement_speed,
+    #     'PercentPhysicalDamageMod' => :attack_damage,
+    #     'PercentSpellBlockMod' => :magic_resist,
+    #     'PercentLifeStealMod' => :life_steal
+    # }
+    def desc_to_hash(input)
+        #out = stats.gsub(/<font.*>/, '')
+        # out = out.gsub(/<br>/, '<br/>')
+        # out = out.gsub(/<.*>/, '')
+        # out = '<p>' + out + '</p>'
+        # out = out.gsub(/<\/?levelScale>/, '')
+        # name = /^.*</.match(stats)
+        #out = /(<.*>)(.*)(<\/.*>)/.match(stats)
+        #out = /((<[a-zA-Z]*>)(.*?)(<\/[a-zA-z]*>))?/.match(stats)
+        # out = {}
+        # input = input.gsub(/<br>/, '</br>')
+        # stats = /<stats>(.*?)<\/stats>/.match(input).to_a
+        # out[:stats] = stats[1]
+        # input = input.gsub(/<stats>(.*?)<\/stats>/, '')
+        # unique = /<unique>UNIQUE Passive - (.*?):<\/unique>/.match(input).to_a
+        # if(not(unique[1].nil?))
+        #     out[:unique][:name] = unique[1]
+        # end
+        input = input.gsub(/<br>/,'</br>')
+        input = input.gsub(/<stats>/, '<p>')
+        input = input.gsub(/<\/stats>/, '</p>')
+        input = input.gsub(/aura/, 'strong')
+        input = input.gsub(/unique/, 'strong')
+        input = input.gsub(/groupLimit/, 'strong')
+        input = input.gsub(/<mana>/, '' )
+        input = input.gsub(/<\/mana>/, '' )
+        input = input.gsub(/passive/, 'strong')
+        input = input.gsub(/active/, 'strong')
+        input = input.gsub(/rules/, 'strong')
+        input = input.gsub(/<levelScale>/, '')
+        input = input.gsub(/<\/levelScale>/, '')
+
+        return input
+    end
 %>
 <html>
 	<head>
         <style>
+            #item_select_grid {
+                
+            }
             .attr {
                 display: none;
             }
+            .hide_me {
+                display: none;
+            }
+            .item_name {
+                padding: 2px;
+            }
+            .item_description {
+                padding: 2px;
+            }
             .item_element {
+                width: 64px;
+                height: 64px;
+                background: black;
+            }
+            .expanded_item_element {
+                width: 128px;
+                background: black;
+            }
+            .item_tooltip{
+                background: black;
+                opacity: 0.8;
+                border: 2px cornsilk solid;
+                color: white;
+                padding: 3px;
+                width: 300px;
+            }
+            .item_add{
+                height:64px;
+                width:64px;
+                float:right;
+            }
+            .selected_item{
+                height:64px;
+                width:64px;
+                float:left;
+            }
+            #selected_items{
+                height:64px;
+                width:384px;
+                border: 4px solid black;
                 padding: 2px;
             }
         </style>
@@ -89,15 +194,37 @@ Code Conventions - Because you'll forget.  You know you will!
         		var selectedItems = [];
         		var selectedMasteries = {};
         		var selectedRunes = {};
+                var staticBase = 'http://ddragon.leagueoflegends.com/cdn/6.11.1/';
 
                 $itemGrid = $('#item_select_grid').isotope({
                     itemSelector: '.item_element',
-                    layoutMode: 'fitRows',
+                    masonry:{
+                        columnWidth: 64
+                    },
                     getSortData: {
                         name: '.name'
                     },
                     sortBy: 'name'
                 })
+                // Bind the click event on each item to reveal the 'Add' button
+                $('.item_element').click(function(){
+                    $('.item_element').not(this).removeClass('expanded_item_element');
+                    $('.item_element').not(this).children('.item_add').addClass('hide_me');
+                    $(this).toggleClass('expanded_item_element');
+                    $(this).children('.item_add').toggleClass('hide_me');
+                    $itemGrid = $itemGrid.isotope('layout');
+                })
+                // Attach a tooltip containing the item HTML to each item element in the isotope grid
+                $('.item_element').each(function(){
+                    var name = $(this).children('.item_name').text()
+                    var description = $(this).children('.item_description').html()
+                    tooltip_html = "<div class='item_tooltip'><p>" + name + "</p><div>" + description + "</div></div>"
+                    $(this).tooltip({
+                        content: tooltip_html,
+                        items: 'div'
+                    })
+                })
+                // Update the isotope grid each time a filter is modified
                 $('.item_attr_filter_box').change(function() {
                     var filterValue = '';
                     $('.item_attr_filter_box').each(function(){
@@ -108,6 +235,58 @@ Code Conventions - Because you'll forget.  You know you will!
                     filterValue = $.trim(filterValue)
                     console.log(filterValue)
                     $itemGrid.isotope({ filter: filterValue });
+                });
+                // Bind the ADD button
+                // 1. Copy the item HTML to the selected_items element
+                // 2. Update the selectedItems object with the properties of the object by making a REST call to the local API
+                // 3. Update the champion statistics and spell descriptions with the stats the item grants
+                $('.item_add').click(function(){
+                    // Grab the HTML for the item DIV and copy to the selected_items
+                    var item = $(this).parent().clone();
+                    $(item).removeClass();
+                    $(item).removeAttr('style')
+                    $(item).addClass('selected_item');
+                    $(item).children('button').remove();
+                    $('#selected_items').append(item);
+                    var name = $(item).children('.item_name').text()
+                    var description = $(item).children('.item_description').html()
+                    tooltip_html = "<div class='item_tooltip'><p>" + name + "</p><div>" + description + "</div></div>"
+                    $(item).tooltip({
+                        content: tooltip_html,
+                        items: 'div'
+                    })
+                    item_id = $(item).children('.id').html()
+                    item_id = parseInt(item_id)
+                    selectedItems.push(item_id)
+                })
+                $('#champion_select').change(function(){
+                    var champ_id = $('#champion_select option:selected').val();
+                    // Grab the champ's JSON from our own API
+                    $.ajax({
+                        url: "http://localhost:3000/champions/show?riot_id=" + champ_id,
+                        success: function(data){
+                            var champion = data[0];
+                            console.log(champion);
+                            // Populate the champion statistics div
+                            var champ_portrait = "<img src='http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion.image.full.replace('\.png','') + '_0.jpg' + "'></img>";
+                            $('#champion_portrait').html(champ_portrait);
+                            $('#stat_title').html(
+                                "<p>" + champion.name + " - " + champion.description + "</p>"
+                                );
+                            $.ajax({
+                                url: "http://localhost:3000/champions/getStatsWithItems",
+                                data: {
+                                    id: champion.riot_id,
+                                    items: selectedItems,
+                                    level: 18
+                                }, 
+                                success: function(data){
+                                    console.log(data)
+                                }
+                            })
+                        }
+                    });
+
                 });
 
         	})
@@ -126,7 +305,11 @@ Code Conventions - Because you'll forget.  You know you will!
         </div>
     	<div id='champion_summary'>
     		<div id='champion_portrait'></div>
-    		<div id='champion_stats'></div>
+    		<div id='champion_stats'>
+                <div id='stat_title'></div>
+                <div id='stat_column_1'></div>
+                <div id='stat_column_2'></div>   
+            </div>
     	</div>
     	<div id='selected_items'></div>
     	<h2>Select Items</h2>
@@ -150,19 +333,31 @@ Code Conventions - Because you'll forget.  You know you will!
                 </div>
     			<button id='clear_item_filters'>Clear Filters</button>
     		</div>
+            <div id='highlighted_item'>
+
+            </div>
     		<div id='item_select_grid'>
                 <% @items.each do |item| %>
                 <% 
+                    # filter_tags = ""
+                    # unless item['stats'].nil?
+                    #     item['stats'].each do |key, stat|
+                    #         filter_tags += ' ' + stat_map[key].to_s
+                    #     end 
+                    # end 
                     filter_tags = ""
-                    unless item['stats'].nil?
-                        item['stats'].each do |key, stat|
-                            filter_tags += ' ' + stat_map[key].to_s
+                    unless item['tags'].nil?
+                        item['tags'].each do |tag|
+                            filter_tags += ' ' + tag
                         end 
-                    end 
+                    end
                 %>
                 <div class='item_element<%= filter_tags %>'>
                     <img src='<%= "#{img_base}/cdn/#{current_version}/img/item/#{item['image']['full']}" %>'>
-                    <!--<p><%= item['riot_id'] %></p>-->
+                    <button class='item_add hide_me'>ADD</button>
+                    <div class='item_name hide_me'><%= item['name'] %></div>
+                    <div class='item_description hide_me'><%=raw item['description']%>
+                    </div>
                     <div class='name attr'><%= item['name'] %></div>
                     <div class='id attr'><%= item['riot_id'] %></div>
                 </div>
